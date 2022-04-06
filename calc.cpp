@@ -1,26 +1,43 @@
-#include <iostream>
+#include <stdexcept>
+#include <limits>
 #include <string>
-#include <map>
-#include <vector>
-#include <fstream>
+#include <iostream>
 using namespace std;
 
+void error (const char* message) {
+    cout << message << "¥n" ;
+    exit(1);
+}
 
 int main() {
-    cout << "Please enter expression (we can handle + and -): ";
+    cout << "Please enter expression (we can handle +, -, *, /): ";
+
     int lval = 0;
-    int rval = 0;
+    int rval;
     char op;
-    int res;
-    cin >> lval >> op >> rval;
+    cin >> lval;
 
-    if (op == '+')
-        res = lval + rval;
-    else if (op == '-')
-        res = lval - rval;
-
-    cout << "Result: " << res << endl;
+    if (!cin) error("no first operand");
+    while (cin >> op) {
+        cin >> rval;
+        if (!cin) error("no second operand");
+        switch (op) {
+            case '+':
+                lval += rval;
+                break;
+            case '-':
+                lval -= rval;
+                break;
+            case '*':
+                lval *= rval;
+                break;
+            case '/':
+                lval /= rval;
+                break;
+            default:
+                cout << "Result: " << lval << endl;
+                return 0;
+        }
+    }
     return 0;
-
-
 }
