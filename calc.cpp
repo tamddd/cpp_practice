@@ -5,7 +5,7 @@
 using namespace std;
 
 void error (const char* message) {
-    cout << message << "¥n" ;
+    cout << message << endl ;
     exit(1);
 }
 
